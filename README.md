@@ -92,3 +92,45 @@ File format for a manual update:
   }
 }
 ```
+
+
+ Objective
+Build an "Infrastructure As Code" project using AWS CDK for enabling canary based deployments of a microservice using AWS api gateway and AWS lambda.
+What we're evaluating in your solution:
+
+    Technical understanding & problem definition
+        demonstrates a clear understanding of the problem
+        appropriately scopes the work
+        identifies key assumptions
+    AWS Architecure & design
+        presents a well-structured design
+        uses appropriate AWS resource to solve the requirement.
+        pragamatic trade-off decisions
+    Communication, naming and documentation
+        clear and concise code documentation where appropriate
+        thoughtful naming at all code levels
+        easy to read and comprehensive README
+    Testing, error handling and validation
+        demonstrates how correctness, reliability, and expected behavior were validated
+        edge-cases and error handling
+    Sound engineering
+        effectively balances completeness, simplicity, and feature-completeness
+
+Requirements:
+
+    Create a new public, Github repo for this project
+    IaC project
+        Create a simple microservice with AWS api gateway and lambda, we will not be evaluating this microservice itself.
+        A change to the microservice logic must be able to be tested by using a canary style deployment.
+        The canary traffic shift must be do-able dynamically without changing IaC.
+        Canary ability must be achieved at the lambda side, not at api gateway side.
+        AWS CDK must be used to deploy and manage all AWS resources.
+        Must be deployable using aws cdk commands.
+        Any database can be used if deemed necessary to implement the IaC project.
+    Include a comprehensive README.md with at least the following:
+        high-level description of the project
+        build instructions
+        how to run the project
+        design decisions
+        trade-offs
+
