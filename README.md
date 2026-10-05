@@ -51,7 +51,7 @@ Do not run `node deploy.js` without a weight before step 1. If you do, the new v
 
 You can also deploy with `npx cdk deploy` and the context values `prevVersion` and `prevWeight`. Then you must find the old version number yourself. `prevWeight` is the weight of the old version, not the new version. The script does these steps for you. It also writes `docs/endpointUrl.json`.
 
-## Useful commands
+### Useful commands
 
 * `npm run test`         perform the jest unit tests
 * `npx cdk deploy`       deploy this stack to your default AWS account/region
