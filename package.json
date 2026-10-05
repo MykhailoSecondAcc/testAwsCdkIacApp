@@ -5,7 +5,8 @@
     "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
     "cdk": "cdk",
     "test": "jest test/unit",
-    "test:integration": "jest test/integration"
+    "test:integration": "jest test/integration",
+    "test:infra": "jest test/infra"
   },
   "devDependencies": {
     "aws-cdk": "2.1144.0",

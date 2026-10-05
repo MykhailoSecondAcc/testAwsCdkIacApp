@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="How it works" id="arOjNulQPrgGPYEw6R8N">
+    <mxGraphModel dx="1445" dy="652" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1027" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-1" parent="1" style="text;html=1;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" value="TestAwsCdkIacApp: canary deploy of a Lambda with CDK" vertex="1">
+          <mxGeometry height="35" width="900" x="20" y="5" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-3" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Developer" vertex="1">
+          <mxGeometry height="60" width="30" x="50" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-4" parent="1" style="shape=note;size=14;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;deploy.js&lt;/b&gt;" vertex="1">
+          <mxGeometry height="70" width="170" x="200" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-5" parent="1" style="shape=note;size=14;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;docs/endpointUrl.json&lt;/b&gt;" vertex="1">
+          <mxGeometry height="70" width="170" x="200" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#E7157B;" value="&lt;b&gt;CloudFormation&lt;/b&gt;&lt;br&gt;TestAwsCdkIacAppStack" vertex="1">
+          <mxGeometry height="70" width="200" x="510" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede7f6;strokeColor=#8C4FFF;" value="&lt;b&gt;API Gateway&lt;/b&gt;&lt;br&gt;IndexApi" vertex="1">
+          <mxGeometry height="70" width="200" x="510" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-8" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#ED7100;verticalAlign=top;" value="&lt;b&gt;Lambda function&lt;/b&gt;&lt;br&gt;TestAwsCdkIacAppIndexFunction" vertex="1">
+          <mxGeometry height="370" width="500" x="830" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ED7100;" value="&lt;b&gt;Alias: live&lt;/b&gt;&lt;br&gt;splits traffic by weight" vertex="1">
+          <mxGeometry height="70" width="170" x="870" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ED7100;" value="&lt;b&gt;Version 1&lt;/b&gt; (old)" vertex="1">
+          <mxGeometry height="60" width="180" x="1120" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ED7100;" value="&lt;b&gt;Version 2&lt;/b&gt; (new)" vertex="1">
+          <mxGeometry height="60" width="180" x="1120" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-12" parent="1" style="text;html=1;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;" value="Old versions are kept (RETAIN)" vertex="1">
+          <mxGeometry height="25" width="430" x="870" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-13" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Client" vertex="1">
+          <mxGeometry height="60" width="30" x="595" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-14" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-3" style="html=1;endArrow=block;endFill=1;strokeColor=#1f6fd1;fontColor=#1f6fd1;fontSize=11;verticalAlign=bottom;labelBackgroundColor=none;" target="jE7AdSZbcAgPV5qjqFkN-4" value="node deploy.js 0.1&lt;br&gt;(0.1 = new version share)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-15" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#1f6fd1;fontColor=#1f6fd1;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.7;exitY=1;entryX=0;entryY=0.5;" target="jE7AdSZbcAgPV5qjqFkN-9" value="1. get-alias&lt;br&gt;(read old version)">
+          <mxGeometry relative="1" x="0.5" as="geometry">
+            <Array as="points">
+              <mxPoint x="319" y="275" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-16" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-4" style="html=1;endArrow=block;endFill=1;strokeColor=#1f6fd1;fontColor=#1f6fd1;fontSize=11;verticalAlign=bottom;labelBackgroundColor=none;" target="jE7AdSZbcAgPV5qjqFkN-6" value="2. cdk deploy&lt;br&gt;prevVersion=1&lt;br&gt;prevWeight=0.9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-17" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-6" style="html=1;endArrow=block;endFill=1;strokeColor=#1f6fd1;fontColor=#1f6fd1;fontSize=11;verticalAlign=bottom;labelBackgroundColor=none;exitX=1;exitY=0.5;entryX=0;entryY=0.095;" target="jE7AdSZbcAgPV5qjqFkN-8" value="3. new version +&lt;br&gt;alias weights">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-18" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-6" style="html=1;endArrow=block;endFill=1;dashed=1;strokeColor=#1f6fd1;fontColor=#1f6fd1;fontSize=11;labelBackgroundColor=#ffffff;" target="jE7AdSZbcAgPV5qjqFkN-7" value="creates">
+          <mxGeometry relative="1" x="0.3" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-19" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#1f6fd1;fontColor=#1f6fd1;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.3;exitY=1;entryX=0.3;entryY=0;" target="jE7AdSZbcAgPV5qjqFkN-5" value="4. save API URL">
+          <mxGeometry relative="1" x="0.3" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-20" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-13" style="html=1;endArrow=block;endFill=1;strokeColor=#2e7d32;fontColor=#2e7d32;fontSize=11;labelBackgroundColor=#ffffff;" target="jE7AdSZbcAgPV5qjqFkN-7" value="HTTP GET">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-21" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#2e7d32;fontColor=#2e7d32;fontSize=11;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" target="jE7AdSZbcAgPV5qjqFkN-9" value="invoke">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-22" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#2e7d32;fontColor=#2e7d32;fontSize=11;fontStyle=1;labelBackgroundColor=#fff3e0;" target="jE7AdSZbcAgPV5qjqFkN-10" value="90%">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jE7AdSZbcAgPV5qjqFkN-23" edge="1" parent="1" source="jE7AdSZbcAgPV5qjqFkN-9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;strokeColor=#2e7d32;fontColor=#2e7d32;fontSize=11;fontStyle=1;labelBackgroundColor=#fff3e0;" target="jE7AdSZbcAgPV5qjqFkN-11" value="10%">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

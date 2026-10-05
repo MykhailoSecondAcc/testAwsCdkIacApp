@@ -1,5 +1,12 @@
 This simple cdk app allows canary deployment withouth any code change to a project. It allows to dynamically shift the traffic between lambda versions, and fully promote or roll back a version.
 
+## Prerequisites
+
+* Node.js 24. The Lambda runtime is also Node.js 24.
+* AWS CLI. `deploy.js` uses it to read the alias.
+* AWS credentials for the target account and region, for example with `aws configure`. The credentials need permission to deploy CloudFormation stacks.
+* `npx cdk bootstrap` one time for each account and region, before the first deploy.
+
 ## Deploy
 
 No need to build the project since it's plain Javascript, not Typescript. 
@@ -15,6 +22,7 @@ Use `deploy.js` to deploy the stack. The script also sets the traffic split betw
 * When the Lambda code changes, CDK publishes a new version and keeps the old versions.
 * The script reads the old version number from the alias. Then it runs `npx cdk deploy` with the old version and its weight. So no need to manually set versions during deploy, it's automated.
 * For each request, Lambda selects a version at random, by the weights
+There is draw.io diagram in the docs folder to show more visually. 
 
 ### Rollout steps
 
@@ -22,10 +30,10 @@ A rollout is the time when the alias sends traffic to two versions.
 
 1. Do the first deploy with `node deploy.js`. This creates the alias and version 1. You cannot set a weight before this step (because there is no old version to send partial traffic to)
 2. Change the code in `lambda/` then run `node deploy.js 0.1`. The new version gets 10% of the traffic.
-4. To change the split, run the script again with a different weight.
-5. Run `node deploy.js`. The new version gets 100% of the traffic. The rollout ends.
+3. To change the split, run the script again with a different weight.
+4. Run `node deploy.js`. The new version gets 100% of the traffic. The rollout ends.
 
-No need to change and project code for rollout weight change. Of course, don't change the code while rolling out, or you will have different traffic going to different versions. 
+No need to change project code for rollout weight change. Of course, don't change the code while rolling out, or you will have different traffic going to different versions. 
 
 ### Roll back
 
@@ -39,13 +47,6 @@ The rollout continues after this step. The new version stays in the alias with 0
 2. Run `node deploy.js`. CDK publishes the old code as a new version. This version gets 100% of the traffic.
 
 Do not run `node deploy.js` without a weight before step 1. If you do, the new version gets 100% of the traffic.
-
-### Decisions and tradeofs
-
-* Project is written in plan Javascript. Mainly, to reduce amount of steps to run it. No need to build, reads natively by lambdas. Since "microservice" is a very basic 1-file, for this task it simplifies much. Not production grade, since it's less robust, no typechecks.
-* Each run is a full `cdk deploy` through CloudFormation. The script does not use `cdk watch` or hotswap. This is slower, but the stack and the alias stay in sync.
-* Use a weight only after a code change, or during a rollout. If not, the deploy fails and the traffic does not change.
-* The script needs the AWS CLI and AWS credentials.
 
 ### Regular CDK commands
 
@@ -92,45 +93,17 @@ File format for a manual update:
   }
 }
 ```
+### Decisions and tradeofs
+
+* Project is written in plain Javascript. Mainly, to reduce amount of steps to run it. No need to build, reads natively by lambdas. Since "microservice" is a very basic 1-file, for this task it simplifies much. Not production grade, since it's less robust, no typechecks.
+* Each run is a full `cdk deploy` through CloudFormation. The script does not use `cdk watch` or hotswap. This is slower, but the stack and the alias stay in sync.
+* Use a weight only after a code change, or during a rollout. If not, the deploy fails and the traffic does not change.
+* The script needs the AWS CLI and AWS credentials.
+* There are no alarms and no automated rollbacks
 
 
- Objective
-Build an "Infrastructure As Code" project using AWS CDK for enabling canary based deployments of a microservice using AWS api gateway and AWS lambda.
-What we're evaluating in your solution:
+## Assumptions
 
-    Technical understanding & problem definition
-        demonstrates a clear understanding of the problem
-        appropriately scopes the work
-        identifies key assumptions
-    AWS Architecure & design
-        presents a well-structured design
-        uses appropriate AWS resource to solve the requirement.
-        pragamatic trade-off decisions
-    Communication, naming and documentation
-        clear and concise code documentation where appropriate
-        thoughtful naming at all code levels
-        easy to read and comprehensive README
-    Testing, error handling and validation
-        demonstrates how correctness, reliability, and expected behavior were validated
-        edge-cases and error handling
-    Sound engineering
-        effectively balances completeness, simplicity, and feature-completeness
-
-Requirements:
-
-    Create a new public, Github repo for this project
-    IaC project
-        Create a simple microservice with AWS api gateway and lambda, we will not be evaluating this microservice itself.
-        A change to the microservice logic must be able to be tested by using a canary style deployment.
-        The canary traffic shift must be do-able dynamically without changing IaC.
-        Canary ability must be achieved at the lambda side, not at api gateway side.
-        AWS CDK must be used to deploy and manage all AWS resources.
-        Must be deployable using aws cdk commands.
-        Any database can be used if deemed necessary to implement the IaC project.
-    Include a comprehensive README.md with at least the following:
-        high-level description of the project
-        build instructions
-        how to run the project
-        design decisions
-        trade-offs
-
+* One environment. There is one stack in one account and region.
+* One rollout at a time. Do not start a new rollout before the current rollout ends.
+* The API is public. It has no auth and no throttling.

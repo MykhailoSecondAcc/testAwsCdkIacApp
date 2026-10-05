@@ -7,6 +7,7 @@ let context = '';
 if (arg !== undefined) {
   const weight = Number(arg);
   if (Number.isNaN(weight)) throw new Error('Weight must be a number');
+  if (weight < 0 || weight > 1) throw new Error('Weight must be from 0 to 1');
 
   const alias = JSON.parse(
     execFileSync('aws', ['lambda', 'get-alias', '--function-name', functionName, '--name', 'live'])
