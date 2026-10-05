@@ -1,0 +1,5 @@
+{
+  "TestAwsCdkIacAppStack": {
+    "IndexApiEndpoint": "https://n8nez55ydf.execute-api.ca-central-1.amazonaws.com/prod"
+  }
+}

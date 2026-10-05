@@ -16,4 +16,4 @@ if (arg !== undefined) {
   context = ` -c prevVersion=${prev} -c prevWeight=${prevWeight}`;
 }
 
-execSync(`npx cdk deploy${context}`, { stdio: 'inherit' });
+execSync(`npx cdk deploy${context} --outputs-file docs/endpointUrl.json`, { stdio: 'inherit' });
